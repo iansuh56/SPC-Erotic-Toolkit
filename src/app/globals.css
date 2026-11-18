@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+:root {
+  /* Bold Blocks v3 design tokens — advocacy-org tone. */
+  --paper: #f7f4f1;
+  --offwhite: #eee9e5;
+  --ink: #2b2a55;
+  --indigo: #555391;
+  --seafoam: #81b2a6;
+  --rose: #e18ba1;
+  --yellow: #e8d259;
+  --indigo-tint: #e9e8f3;
+  --placeholder: #e6e0da;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-offwhite: var(--offwhite);
+  --color-ink: var(--ink);
+  --color-indigo: var(--indigo);
+  --color-seafoam: var(--seafoam);
+  --color-rose: var(--rose);
+  --color-yellow: var(--yellow);
+  --color-indigo-tint: var(--indigo-tint);
+  --color-placeholder: var(--placeholder);
+
+  --font-display: var(--font-newsreader);
+  --font-sans: var(--font-public-sans);
+  --font-mono: var(--font-ibm-plex-mono);
+
+  --radius-none: 0px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+  }
+
+  /* Visible focus style per the Bold Blocks v3 a11y spec: 2px ink outline, offset. */
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+
+  .tone-ink :focus-visible,
+  .tone-indigo :focus-visible {
+    outline-color: var(--yellow);
+  }
+}
+
+@layer utilities {
+  .skip-link {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 100;
+    background: var(--ink);
+    color: var(--offwhite);
+    padding: 0.6rem 1rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+  }
+
+  .skip-link:not(:focus) {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+  }
+}

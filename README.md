@@ -33,13 +33,32 @@ npm run lint
 npx tsc --noEmit
 ```
 
-## Deploying to Cloudflare Pages
+## Deploying to Cloudflare
 
-This site has no server-side features, so it deploys as a static site:
+This site has no server-side features — it's a static export — so it deploys as static assets, not as a Next.js server.
 
-1. Connect the repo in the Cloudflare Pages dashboard (or use `wrangler pages deploy`).
+### Option A: Cloudflare Workers (static assets), via Git integration
+
+This repo includes `wrangler.jsonc`, which points Wrangler at the `out/` folder as static assets. **This file is what matters** — its presence stops Wrangler's auto-config from trying to set up the Next.js-on-Workers (OpenNext) SSR adapter, which this project doesn't need and which fails on a pure static export.
+
+In the Cloudflare dashboard, for a Worker connected to this repo:
+
+1. Build command: `npm run build`
+2. Deploy command: `npx wrangler deploy` (or `npm run deploy`)
+3. Framework preset: none / static (don't let it auto-select "Next.js" — that triggers the OpenNext migration)
+
+### Option B: Cloudflare Pages
+
+1. Connect the repo in the Cloudflare Pages dashboard.
 2. Build command: `npm run build`
 3. Build output directory: `out`
 4. Framework preset: none needed (plain static export).
+
+### Deploying manually
+
+```bash
+npm run build
+npx wrangler deploy
+```
 
 No environment variables or server bindings are required.

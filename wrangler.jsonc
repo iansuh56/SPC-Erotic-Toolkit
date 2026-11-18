@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Static export only — no Worker script, no Next.js-on-Workers/OpenNext
+  // adapter. This file's presence stops `wrangler deploy` from running its
+  // auto-config "migrate to OpenNext" flow for detected Next.js projects.
+  "name": "spc-erotic-toolkit",
+  "compatibility_date": "2026-11-18",
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  }
+}
